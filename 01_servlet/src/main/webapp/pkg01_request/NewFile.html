@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+  <!--
+    서버 측 주소 만들기
+    
+    /ContextPath/URLMapping
+  -->
+
+  <!-- 1. <a> 태그 요청 -->
+  <div>
+    <a href="/servlet/request?age=10">요청</a>
+  </div>
+  
+  <!-- 2. JavaScript : location 객체 요청 -->
+  <div>
+    <a href="javascript:ex1()">요청</a>
+    <input type="hidden" id="inp-age" value="20">
+  </div>
+  <script type="text/javascript">
+    const ex1 = ()=>{
+      const age = document.getElementById('inp-age');
+      location.href = '/servlet/request?age=' + age.value;
+    }
+  </script>
+  <div>
+    <button type="button" id="btn" data-age="30" data-name="홍길동">요청</button>
+  </div>
+  <script>
+    document.getElementById('btn').addEventListener('click', (evt)=>{
+      location.href = '/servlet/request?age=' + evt.target.dataset.age + '&name=' + evt.target.dataset.name;
+    })
+  </script>
+  
+  <!-- 3. <form> 태그 요청 : submit -->
+  <div>
+    <form id="frm-input" action="/servlet/request" method="get">
+      <input type="text" name="age" id="age" placeholder="나이">
+      <input type="text" name="name" id="name" placeholder="이름">
+      <button type="submit">요청</button>
+    </form>
+  </div>
+  <script>
+    const frmInput = document.getElementById('frm-input');
+    const age = document.getElementById('age');
+    const name = document.getElementById('name');
+    frmInput.addEventListener('submit', (evt)=>{
+      const regAge = /[^0-9]/;
+      if(regAge.test(age.value)){
+        alert('나이는 숫자만 입력할 수 있습니다.');
+        age.focus();
+        evt.preventDefault();
+        return;   // return false;
+      }
+      if(name.value.trim().length === 0){
+        alert('이름은 필수입니다.');
+        name.focus();
+        evt.preventDefault();
+        return;   // return false;
+      }
+    })
+  </script>
+
+  <form method="get" action="/path/somewhere">
+
+    <!-- 입력 상자 -->
+    <div>
+      <input type="text" name="id" placeholder="아이디">
+    </div>
+    <div>
+      <input type="password" name="pw" placeholder="비밀번호">
+    </div>
+    <div>
+      <textarea name="intro"></textarea>
+    </div>
+
+    <!-- 단일 선택 -->
+    <div>
+      <input type="radio" name="gender" id="man" value="man">
+      <label for="man">남자</label>
+      <input type="radio" name="gender" id="woman" value="woman">
+      <label for="woman">여자</label>
+      <input type="radio" name="gender" id="none" value="none" checked="checked">
+      <label for="none">선택안함</label>
+    </div>
+
+    <!-- 다중 선택 - 1 (각 선택 상자의 name 을 다르게 지정하는 방식, name 이 다르기 때문에 name 만으로 각 선택 상자를 식별할 수 있으므로 value 를 지정할 필요가 없다.) -->
+    <div>
+      <input type="checkbox" name="game" id="game">
+      <label for="game">게임</label>
+      <input type="checkbox" name="travel" id="travel">
+      <label for="travel">여행</label>
+      <input type="checkbox" name="lego" id="lego">
+      <label for="lego">레고</label>
+    </div>
+    <!-- 다중 선택 - 2 (각 선택 상자의 name 을 통일하는 방식, name 이 같기 때문에 name 으로 각 선택 상자를 식별할 수 없으므로 value 를 지정해야 한다.) -->
+    <div>
+      <input type="checkbox" name="hobbies" id="game" value="game">
+      <label for="game">게임</label>
+      <input type="checkbox" name="hobbies" id="travel" value="travel">
+      <label for="travel">여행</label>
+      <input type="checkbox" name="hobbies" id="lego" value="lego">
+      <label for="lego">레고</label>
+    </div>
+
+    <!-- 목록에서 선택 -->
+    <div>
+      <select name="region">
+        <option value="02">02</option>
+        <option value="032">032</option>
+        <option value="031">031</option>
+      </select>
+    </div>
+
+    <!-- 목록에서 선택 + 직접 입력 -->
+    <input type="text" name="host" list="host">
+    <datalist id="host">
+      <option>naver.com</option>
+      <option>kakao.com</option>
+      <option>gmail.com</option>
+    </datalist>
+
+    <!-- 정해진 값 -->
+    <input type="hidden" name="charencoding" value="utf-8">
+    <input type="hidden" name="author" value="hong">
+
+    <!-- 서브밋 버튼 -->
+    <button type="submit">전송</button>
+
+  </form>
+
+  <hr>
+
+  <!-- 파일 첨부 폼 형식 -->
+  <form method="post" enctype="multipart/form-data">
+
+    <div>
+      <input type="file" name="profile" multiple="multiple">
+    </div>
+
+    <div>
+      <button type="submit">전송</button>
+    </div>
+
+  </form>
+
+  <hr>
+
+  <!-- 네이버 검색 폼 -->
+  <style>
+    @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css');
+  </style>
+  <form action="https://search.naver.com/search.naver" method="get">
+    <input type="text" name="query">
+    <button type="submit">
+      <i class="fa-solid fa-magnifying-glass"></i>
+    </button>
+  </form>
+
+
+
+  <!-- 4. JavaScript : 비동기 요청 (별도 수업) -->
+
+</body>
+</html>
