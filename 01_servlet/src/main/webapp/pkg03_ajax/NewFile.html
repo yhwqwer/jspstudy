@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../assets/lib/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+
+  <div>
+    <button type="button" id="weather-btn">현재날씨가져오기</button>
+  </div>
+  <div>
+    <table border="1">
+      <caption id="caption"></caption>
+      <thead id="thead"></thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+  <script>
+    const getWeather = ()=>{
+      const options = {
+        method: 'GET'
+      }
+      fetch('/servlet/weather', options)
+      .then(response=>response.text())
+      .then(resData=>{
+        // XMLDocument 로 변경하기
+        const domParser = new DOMParser();
+        const xmlDocument = domParser.parseFromString(resData, 'application/xml');
+        // <thead id="thead"></thead>
+        const thead = document.getElementById('thead');
+        thead.innerHTML = '<tr><td>지역</td><td>날씨</td><td>온도</td></tr>';
+        // <caption id="caption"></caption>
+        const caption = document.getElementById('caption');
+        const weather = xmlDocument.getElementsByTagName('weather')[0];
+        caption.innerHTML = weather.getAttribute('year') + '년 '
+                          + weather.getAttribute('month') + '월 '
+                          + weather.getAttribute('day') + '일 '
+                          + weather.getAttribute('hour') + '시';
+        // <tbody id="tbody"></tbody>
+        const tbody = document.getElementById('tbody');
+        tbody.innerHTML = '';
+        const locals = xmlDocument.getElementsByTagName('local');
+        for(let i = 0; i < locals.length; i++){
+          let tr = '<tr>';
+          tr += '<td>' + locals[i].textContent + '</td>';
+          tr += '<td>' + locals[i].getAttribute('desc') + '</td>';
+          tr += '<td>' + locals[i].getAttribute('ta') + '</td>';
+          tr += '</tr>';
+          tbody.innerHTML += tr;
+        }
+      })
+    }
+    document.getElementById('weather-btn').onclick = getWeather;
+  </script>
+
+  <div>
+    <select id="siDo">
+      <option value="1100">서울</option>
+      <option value="2300">인천</option>
+    </select>
+    <select id="guGun">
+      <option value="1116">강남구</option>
+      <option value="2304">부평구</option>
+    </select>
+    <button type="button" id="accident-btn">사망자수가져오기</button>
+  </div>
+  <style>
+    #accidents {
+      overflow: hidden;
+      width: 950px;
+    }
+    .accident {
+      float: left;
+      width: 300px;
+      height: 100px;
+      border: 1px solid gray;
+      margin: 5px 5px 0 0;
+      cursor: pointer;
+    }
+    .accident:hover {
+      background-color: silver;
+    }
+  </style>
+  <div id="accidents"></div>
+  <script>
+    const accidentBtn = $('#accident-btn');
+    accidentBtn.on('click', (evt)=>{
+      $.ajax({
+        /* 요청 */
+        type: 'get',
+        url: '/servlet/accident',
+        data: 'siDo=' + $('#siDo').val() + '&guGun=' + $('#guGun').val(),
+        /* 응답 */
+        dataType: 'json'
+      })
+      .done(resData=>{
+        //console.log(resData)
+        const accidents = $('#accidents');
+        accidents.empty();
+        $.each(resData.items.item, (i, accident)=>{
+          console.log(accident);
+          let div = '<div class="accident">';
+          div += '<ul>';
+          div += '<li>날짜 : ' + accident.occrrnc_dt + '</li>';
+          div += '<li>인원 : ' + accident.dth_dnv_cnt + '</li>';
+          div += '</ul>';
+          div += '</div>';
+          accidents.append(div);
+        })
+      })
+    })
+  </script>
+
+</body>
+</html>

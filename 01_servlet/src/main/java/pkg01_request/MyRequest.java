@@ -10,6 +10,32 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+/*
+ * Servlet
+ * 1. 클라이언트의 요청을 받아서 실행되는 Java 클래스이다.
+ * 2. jakarta.servlet.http.HttpServlet 클래스를 상속 받는 클래스이다.
+ * 3. Tomcat 에 의해서 실행된다.
+ * 4. 동일한 프로젝트(컨텍스트) 내에서는 동일한 이름의 Servlet 이 존재할 수 없다.
+ */
+
+
+/*
+ * URL
+ * 1. 형식
+ *  protocol://host:port/contextPath/urlMapping
+ * 2. contextPath
+ *  1) 프로젝트(컨텍스트)의 대표 경로를 의미한다.
+ *  2) 프로젝트의 속성(properties)에서 변경할 수 있다.
+ *    프로젝트 우클릭 - Properties - Web Project Setting
+ * 3. urlMapping
+ *  1) 프로젝트의 내부 경로를 의미한다.
+ *  2) Servlet 의 호출 주소를 의미한다.
+ *  3) 변경 방법
+ *    (1) web.xml
+ *    (2) @WebServlet
+ */
+
+
 
 public class MyRequest extends HttpServlet {
   
