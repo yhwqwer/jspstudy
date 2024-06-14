@@ -54,7 +54,7 @@ public class Upload extends HttpServlet {
 		File[] files = uploadDir.listFiles();
 		for(File file : files) {
 		  String filename = file.getName();
-		  out.println("<div>" + filename + "</div>");
+		  out.println("<div><a href=\"/servlet/download?filename="+ filename +"\">" + filename + "</a></div>");
 		}
 		out.flush();
 		out.close();

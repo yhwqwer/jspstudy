@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd" version="6.0">
+  <display-name>01_servlet</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
   <servlet>
     <description></description>
     <display-name>Weather</display-name>
@@ -10,15 +19,6 @@
     <servlet-name>Weather</servlet-name>
     <url-pattern>/weather</url-pattern>
   </servlet-mapping>
-  <display-name>01_servlet</display-name>
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
-  </welcome-file-list>
   <servlet>
     <servlet-name>MyRequest</servlet-name>
     <servlet-class>pkg01_request.MyRequest</servlet-class>
@@ -35,7 +35,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>Accident</servlet-name>
-    <url-pattern>/Accident</url-pattern>
+    <url-pattern>/accident</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -46,5 +46,125 @@
   <servlet-mapping>
     <servlet-name>Upload</servlet-name>
     <url-pattern>/upload</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Download</display-name>
+    <servlet-name>Download</servlet-name>
+    <servlet-class>pkg04_file.Download</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Download</servlet-name>
+    <url-pattern>/Download</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Destination</display-name>
+    <servlet-name>Destination</servlet-name>
+    <servlet-class>pkg05_forward.Destination</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Destination</servlet-name>
+    <url-pattern>/destination</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>StopOver</display-name>
+    <servlet-name>StopOver</servlet-name>
+    <servlet-class>pkg05_forward.StopOver</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StopOver</servlet-name>
+    <url-pattern>/stopover</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Destination1</display-name>
+    <servlet-name>Destination1</servlet-name>
+    <servlet-class>pkg06_redirect.Destination1</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Destination1</servlet-name>
+    <url-pattern>/destination1</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Destination2</display-name>
+    <servlet-name>Destination2</servlet-name>
+    <servlet-class>pkg06_redirect.Destination2</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Destination2</servlet-name>
+    <url-pattern>/destination2</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SaveCookie</display-name>
+    <servlet-name>SaveCookie</servlet-name>
+    <servlet-class>pkg07_Cookie.SaveCookie</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SaveCookie</servlet-name>
+    <url-pattern>/savecookie</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ReadCookie</display-name>
+    <servlet-name>ReadCookie</servlet-name>
+    <servlet-class>pkg07_Cookie.ReadCookie</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReadCookie</servlet-name>
+    <url-pattern>/readcookie</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeleteCookie</display-name>
+    <servlet-name>DeleteCookie</servlet-name>
+    <servlet-class>pkg07_Cookie.DeleteCookie</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteCookie</servlet-name>
+    <url-pattern>/deletecookie</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MyServletContext</display-name>
+    <servlet-name>MyServletContext</servlet-name>
+    <servlet-class>pkg08_databind.MyServletContext</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MyServletContext</servlet-name>
+    <url-pattern>/myservletcontext</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MyHttpServletRequest</display-name>
+    <servlet-name>MyHttpServletRequest</servlet-name>
+    <servlet-class>pkg08_databind.MyHttpServletRequest</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MyHttpServletRequest</servlet-name>
+    <url-pattern>/myhttpservletrequest</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MyHttpSession</display-name>
+    <servlet-name>MyHttpSession</servlet-name>
+    <servlet-class>pkg08_databind.MyHttpSession</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MyHttpSession</servlet-name>
+    <url-pattern>/myhttpsession</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DataConfirm</display-name>
+    <servlet-name>DataConfirm</servlet-name>
+    <servlet-class>pkg08_databind.DataConfirm</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DataConfirm</servlet-name>
+    <url-pattern>/dataconfirm</url-pattern>
   </servlet-mapping>
 </web-app>
