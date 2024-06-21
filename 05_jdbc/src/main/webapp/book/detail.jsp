@@ -21,15 +21,20 @@
   
   <div>
     <a href="${contextPath}/list.do">목록보기</a>
-    <a href="${contextPath}/edit.do">편집</a>
+    <a href="${contextPath}/edit.do?bookNo=${book.book_no}">편집</a>
     <a href="javascript:fnDeleteBook()">삭제</a>
   </div>
   <script>
     const fnDeleteBook = ()=>{
       if(confirm('현재 책을 완전히 삭제할까요?')){
-        location.href = '${contextPath}/delete.do?bookNo=${book.book_no}'; 
+        location.href = '${contextPath}/delete.do?bookNo=${book.book_no}';
       }
     }
+    
+    const modifyMessage = '${modifyMessage}';
+    if(modifyMessage !== '')
+      alert(modifyMessage);
+    
   </script>
 
 

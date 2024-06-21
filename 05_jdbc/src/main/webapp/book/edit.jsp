@@ -13,21 +13,25 @@
 <body>
 
   <div>
-    <form action="${contextPath}/register.do" method="post">
-      <div><input type="text" name="title" placeholder="제목"></div>
-      <div><input type="text" name="author" placeholder="저자"></div>
-      <div><input type="text" name="price" placeholder="가격"></div>
-      <div><button type="submit">등록하기</button></div>
+    <form id="edit-form" action="${contextPath}/modify.do" method="post">
+      <input type="hidden" name="bookNo" value="${book.book_no}">
+      <div><input type="text" name="title" id="title" value="${book.title}"></div>
+      <div><input type="text" name="author" value="${book.author}"></div>
+      <div><input type="text" name="price" id="price" value="${book.price}"></div>
+      <div>
+        <button type="submit">수정하기</button>
+        <button type="button" onclick="history.back()">취소하기</button>
+      </div>      
     </form>
   </div>
 <script>
   
-    const registerForm = document.getElementById('register-form');
+    const editForm = document.getElementById('register-form');
     const title = document.getElementById('title');
     const price = document.getElementById('price');
     
     const checkSubmit = ()=>{      
-      registerForm.addEventListener('submit', (evt)=>{
+      editForm.addEventListener('submit', (evt)=>{
         if(title.value === ''){
           alert('제목은 반드시 입력해야 합니다.');
           title.focus();

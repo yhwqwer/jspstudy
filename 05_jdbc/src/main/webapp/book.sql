@@ -1,4 +1,3 @@
-
 DROP TABLE book_t;
 CREATE TABLE book_t (
   book_no NUMBER             NOT NULL,
