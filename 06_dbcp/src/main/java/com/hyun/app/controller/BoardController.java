@@ -11,19 +11,18 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-
 public class BoardController extends HttpServlet {
   
-	private static final long serialVersionUID = 1L;
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		request.setCharacterEncoding("UTF-8");
+  private static final long serialVersionUID = 1L;
+  
+  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+  
+    request.setCharacterEncoding("UTF-8");
     
-    String requestURI = request.getRequestURI();    /* http://localhost:9090/mvc/list.do */
-    String contextPath = request.getContextPath();  /*                      /mvc         */
+    String requestURI = request.getRequestURI();
+    String contextPath = request.getContextPath();
     int beginIndex = requestURI.indexOf(contextPath) + contextPath.length() + 1;
-    String urlMapping = requestURI.substring(beginIndex);   /* list.do */
+    String urlMapping = requestURI.substring(beginIndex);
   
     BoardService boardService = new BoardServiceImpl();
     
@@ -31,10 +30,24 @@ public class BoardController extends HttpServlet {
     
     switch(urlMapping) {
     // 단순 이동 (서비스가 필요하지 않다. forward 로 이동한다.)
-    
+    case "write.do":
+      actionForward = new ActionForward("/board/write.jsp", false);
+      break;
     // 비즈니스 로직 처리 (서비스가 필요하다.)
     case "list.do":
       actionForward = boardService.getBoardList(request);
+      break;
+    case "register.do":
+      actionForward = boardService.registerBoard(request);
+      break;
+    case "removeBoardList.do":
+      actionForward = boardService.removeBoardList(request);
+      break;
+    case "detail.do": System.out.println("hahah");
+      actionForward = boardService.getBoardByNo(request);
+      break;
+    case "modify.do":
+      actionForward = boardService.modifyBoard(request);
       break;
     }
     
@@ -45,18 +58,11 @@ public class BoardController extends HttpServlet {
         request.getRequestDispatcher(actionForward.getPath()).forward(request, response);
       }
     }
-		
-		
-		
-		
-	}
+  
+  }
 
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-		
-		
-		
-	}
+  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    doGet(request, response);
+  }
 
 }

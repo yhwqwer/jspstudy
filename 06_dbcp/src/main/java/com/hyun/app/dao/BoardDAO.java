@@ -12,5 +12,6 @@ public interface BoardDAO {
   int insertBoard(BoardDTO board);
   int updateBoard(BoardDTO board);
   int deleteBoard(int board_no);
+  int deleteBoardList(String board_no_list);
   void close() throws Exception;
 }
