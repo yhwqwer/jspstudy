@@ -13,7 +13,7 @@
 <body>
 
   <form action="${contextPath}/modify.do" method="post">
-    <input type="hidden" name="board_no" value="${board.board_no}">
+    <input type="hidden" id="board_no" name="board_no" value="${board.board_no}">
     <div>
       <label for="title">제목</label>
       <input type="text" name="title" id="title" value="${board.title}">
@@ -25,10 +25,20 @@
     <div>
       <button type="submit">수정완료</button>
       <button type="reset">수정초기화</button>
+      <button type="button" onclick="fnRemoveBoard()">삭제</button> 
       <button type="button" onclick="location.href='${contextPath}/list.do'">목록보기</button>
     </div>
   </form>
-
+  <script>
+    const board_no = document.getElementById('board_no');
+    const fnRemoveBoard = ()=>{
+      if(confirm('게시글을 삭제할까요?')){
+        location.href = '${contextPath}/removeBoard.do?board_no=' + board_no.value;
+      } else{
+        alert('취소되었습니다.');
+      }
+    }
+  </script>
 
 </body>
 </html>

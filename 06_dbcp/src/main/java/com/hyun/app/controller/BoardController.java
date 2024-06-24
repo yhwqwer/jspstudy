@@ -43,11 +43,14 @@ public class BoardController extends HttpServlet {
     case "removeBoardList.do":
       actionForward = boardService.removeBoardList(request);
       break;
-    case "detail.do": System.out.println("hahah");
+    case "detail.do": 
       actionForward = boardService.getBoardByNo(request);
       break;
     case "modify.do":
       actionForward = boardService.modifyBoard(request);
+      break;
+    case "removeBoard.do":
+      actionForward = boardService.removeBoard(request);
       break;
     }
     

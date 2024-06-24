@@ -168,8 +168,22 @@ public class BoardDAOImpl implements BoardDAO {
 
   @Override
   public int deleteBoard(int board_no) {
-    // TODO Auto-generated method stub
-    return 0;
+
+    int result = 0;
+    
+    try {
+      conn = dataSource.getConnection();
+      String sql = "DELETE FROM board_t WHERE board_no = ?";
+      ps = conn.prepareStatement(sql);
+      ps.setInt(1, board_no);
+      result = ps.executeUpdate();
+      close();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    
+    
+    return result;
   }
   
   @Override

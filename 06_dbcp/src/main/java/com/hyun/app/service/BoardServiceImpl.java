@@ -146,8 +146,13 @@ public class BoardServiceImpl implements BoardService {
 
   @Override
   public ActionForward removeBoard(HttpServletRequest request) {
-    // TODO Auto-generated method stub
-    return null;
+    
+    Optional<String> opt = Optional.ofNullable(request.getParameter("board_no"));
+    int board_no = Integer.parseInt(opt.orElse("0"));
+    
+    int result = boardDAO.deleteBoard(board_no);
+    
+    return new ActionForward(request.getContextPath() + "/list.do?remove=" + result, true);
   }
   
   @Override
@@ -163,6 +168,5 @@ public class BoardServiceImpl implements BoardService {
     return new ActionForward(request.getContextPath() + "/list.do?remove=" + result, true);
     
   }
-  
 
 }
