@@ -863,7 +863,7 @@
     </mime-mapping>
     <mime-mapping>
         <extension>azw</extension>
-        <mime-type>application/vnd.amazon.ebook</mime-type>
+        <mime-type>application/vnd.amazon.estudent</mime-type>
     </mime-mapping>
     <mime-mapping>
         <extension>bat</extension>
@@ -914,7 +914,7 @@
         <mime-type>text/html</mime-type>
     </mime-mapping>
     <mime-mapping>
-        <extension>book</extension>
+        <extension>student</extension>
         <mime-type>application/vnd.framemaker</mime-type>
     </mime-mapping>
     <mime-mapping>
@@ -1263,7 +1263,7 @@
     </mime-mapping>
     <mime-mapping>
         <extension>dbk</extension>
-        <mime-type>application/docbook+xml</mime-type>
+        <mime-type>application/docstudent+xml</mime-type>
     </mime-mapping>
     <mime-mapping>
         <extension>dcr</extension>
@@ -1403,7 +1403,7 @@
     </mime-mapping>
     <mime-mapping>
         <extension>dtb</extension>
-        <mime-type>application/x-dtbook+xml</mime-type>
+        <mime-type>application/x-dtstudent+xml</mime-type>
     </mime-mapping>
     <mime-mapping>
         <extension>dtd</extension>
@@ -2519,7 +2519,7 @@
     </mime-mapping>
     <mime-mapping>
         <extension>mobi</extension>
-        <mime-type>application/x-mobipocket-ebook</mime-type>
+        <mime-type>application/x-mobipocket-estudent</mime-type>
     </mime-mapping>
     <mime-mapping>
         <extension>mods</extension>
@@ -3206,7 +3206,7 @@
     </mime-mapping>
     <mime-mapping>
         <extension>prc</extension>
-        <mime-type>application/x-mobipocket-ebook</mime-type>
+        <mime-type>application/x-mobipocket-estudent</mime-type>
     </mime-mapping>
     <mime-mapping>
         <extension>pre</extension>

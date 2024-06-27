@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.min.app.dao.BoardMapper">
+
+  <!-- 
+    id 속성
+    1. 호출할 쿼리문을 식별할 수 있는 속성이다. (중복이 있으면 안 된다.)
+    2. 쿼리문을 호출하는 DAO 의 메소드 이름과 동일하게 설정한다.
+  -->
+  
+  <!--
+    parameterType 속성
+    1. 쿼리문으로 전달되는 파라미터의 타입을 명시한다.
+    2. 주요 작성 예시
+      1) parameterType="int" (parameterType="Integer")
+      2) parameterType="String"
+      3) parameterType="Map" (parameterType="hashmap")
+      4) parameterType="com.min.app.dto.BoardDTO"
+  -->
+  
+  <!--
+    parameter 작성 방법
+    
+    1. #{}
+      1) PreparedStatement 를 이용하여 ? 에 값을 전달하는 JDBC 방식으로 처리한다.
+      2) 전달된 파라미터가 1개인 경우 파라미터 이름을 작성한다.
+      3) 전달된 파라미터가 2개 이상인 경우 #{param1}, #{param2} 같은 방식으로 작성한다.
+      4) 전달된 파라미터가 Map 인 경우 #{key} 같은 방식으로 작성한다.
+      5) 전달된 파라미터가 객체인 경우 #{field} 같은 방식으로 작성한다.
+    
+    2. ${}
+      1) 문자열 대체 (String Substitution)
+      2) 문자열 대체는 전달된 값에 따옴표나 이스케이프 같은 처리를 하지 않는다.
+      3) 문자열 대체는 전달된 값을 그대로 사용한다.
+      4) SQL 구문의 메타 데이터(테이블 이름, 칼럼 이름, 쿼리문 자체)를 처리할 때 사용한다.
+  -->
+  
+  <!--
+    resultType 속성
+    1. SELECT 문의 반환 결과 타입을 작성한다.
+    2. INSERT / UPDATE / DELETE 문은 작성하지 않는다. (결과 타입은 int 로 정해져 있다.)
+  -->
+
+  <select id="getBoardCount" resultType="int">
+    SELECT COUNT(*)
+      FROM board_t
+  </select>
+
+  <select id="getBoardList" parameterType="Map" resultType="com.min.app.dto.BoardDTO">
+    SELECT board_no, title, contents, create_dt, modify_dt
+      FROM (SELECT ROW_NUMBER() OVER(ORDER BY ${column} ${sort}) AS rnum, board_no, title, contents, create_dt, modify_dt
+              FROM board_t)
+     WHERE rnum BETWEEN #{begin} AND #{end}
+  </select>
+
+  <select id="getBoardByNo" parameterType="int" resultType="com.min.app.dto.BoardDTO">
+    SELECT board_no, title, contents, create_dt, modify_dt
+      FROM board_t
+     WHERE board_no = #{boardNo}
+  </select>
+
+  <insert id="insertBoard" parameterType="com.min.app.dto.BoardDTO">
+    INSERT INTO board_t (
+        board_no
+      , title
+      , contents
+      , create_dt
+      , modify_dt
+    ) VALUES (
+        board_seq.nextval
+      , #{title}
+      , #{contents}
+      , CURRENT_DATE
+      , CURRENT_DATE
+    )
+  </insert>
+
+  <update id="updateBoard" parameterType="com.min.app.dto.BoardDTO">
+    UPDATE board_t
+       SET title = #{title}
+         , contents = #{contents}
+         , modify_dt = CURRENT_DATE
+     WHERE board_no = #{boardNo}
+  </update>
+
+  <delete id="deleteBoard" parameterType="int">
+    DELETE
+      FROM board_t
+     WHERE board_no = #{boardNo}
+  </delete>
+
+</mapper>
