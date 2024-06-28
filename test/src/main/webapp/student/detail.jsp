@@ -11,13 +11,13 @@
 </head>
 <body>
   <div>
-    <div>학번: <c:out value="${student.stu_no}" /></div>
-    <div>이름: <c:out value="${student.name}" /></div>
-    <div>국어: <c:out value="${student.kor}" /></div>
-    <div>영어: <c:out value="${student.eng}" /></div>
-    <div>수학: <c:out value="${student.math}" /></div>
-    <div>평균: <c:out value="${student.ave}" /></div>
-    <div>학점: <c:out value="${student.mark}" /></div>
+    <div>학번: ${student.stu_no}</div>
+    <div>이름: ${student.name}</div>
+    <div>국어: ${student.kor}</div>
+    <div>영어: ${student.eng}</div>
+    <div>수학: ${student.math}</div>
+    <div>평균: ${student.ave}</div>
+    <div>학점: ${student.mark}</div>
   </div>
   <div>
     <a href="${contextPath}/edit.do?stuNo=${student.stu_no}">수정하기</a>

@@ -22,7 +22,7 @@ public class StudentDAO {
         return instance;
     }
 
-    // 데이터베이스 연결 메서드
+    // 데이터베이스 연결 메소드
     private void connection() throws Exception {
         Class.forName("oracle.jdbc.OracleDriver");
         String url = "jdbc:oracle:thin:@localhost:1521:xe";
@@ -31,14 +31,14 @@ public class StudentDAO {
         conn = DriverManager.getConnection(url, user, password);
     }
 
-    // 데이터베이스 리소스 해제 메서드
+    // 데이터베이스 리소스 해제 메소드
     private void close() throws Exception {
         if (conn != null) conn.close();
         if (ps != null) ps.close();
         if (rs != null) rs.close();
     }
 
-    // 학생 목록 조회 메서드
+    // 학생 목록 조회 메소드
     public List<StudentDTO> getStudents() {
         List<StudentDTO> students = new ArrayList<>();
         String sql = "SELECT stu_no, name, kor, eng, math, ave, mark FROM student_t ORDER BY stu_no";
@@ -70,7 +70,7 @@ public class StudentDAO {
         return students;
     }
 
-    // 학번으로 학생 조회 메서드
+    // 학번으로 학생 조회 메소드
     public StudentDTO getStudentsByNo(int stuNo) {
         StudentDTO student = null;
         String sql = "SELECT stu_no, name, kor, eng, math, ave, mark FROM student_t WHERE stu_no = ?";
@@ -102,7 +102,7 @@ public class StudentDAO {
         return student;
     }
 
-    // 학생 등록 메서드
+    // 학생 등록 메소드
     public int insertStudent(StudentDTO student) {
         int result = 0;
         String sql = "INSERT INTO student_t (stu_no, name, kor, eng, math, ave, mark) VALUES (student_seq.NEXTVAL, ?, ?, ?, ?, ?, ?)";
@@ -128,7 +128,7 @@ public class StudentDAO {
         return result;
     }
 
-    // 학생 정보 수정 메서드
+    // 학생 정보 수정 메소드
     public int updateStudent(StudentDTO student) {
         int result = 0;
         String sql = "UPDATE student_t SET name = ?, kor = ?, eng = ?, math = ?, ave = ?, mark = ? WHERE stu_no = ?";
@@ -155,7 +155,7 @@ public class StudentDAO {
         return result;
     }
 
-    // 학생 삭제 메서드
+    // 학생 삭제 메소드
     public int deleteStudent(int stuNo) {
         int result = 0;
         String sql = "DELETE FROM student_t WHERE stu_no = ?";
@@ -176,7 +176,7 @@ public class StudentDAO {
         return result;
     }
 
-    // 특정 평균 범위의 학생 목록 조회 메서드
+    // 특정 평균 범위의 학생 목록 조회 메소드
     public List<StudentDTO> getStudentsByAverageRange(double begin, double end) {
         List<StudentDTO> students = new ArrayList<>();
         String sql = "SELECT stu_no, name, kor, eng, math, ave, mark FROM student_t WHERE ave BETWEEN ? AND ?";
@@ -210,7 +210,7 @@ public class StudentDAO {
         return students;
     }
 
-    // 전체 학생 평균 점수 조회 메서드
+    // 전체 학생 평균 점수 조회 메소드
     public double getAverageScore() {
         double average = 0.0;
         String sql = "SELECT NVL(AVG(ave), 0) FROM student_t";
@@ -233,7 +233,7 @@ public class StudentDAO {
         return average;
     }
 
-    // 상위 3명의 학생 조회 메서드
+    // 상위 3명의 학생 조회 메소드
     public List<StudentDTO> getTop3Students() {
         List<StudentDTO> students = new ArrayList<>();
         String sql = "SELECT stu_no, name, kor, eng, math, ave, mark FROM (SELECT stu_no, name, kor, eng, math, ave, mark, RANK() OVER(ORDER BY ave DESC) AS rnk FROM student_t) WHERE rnk <= 3";

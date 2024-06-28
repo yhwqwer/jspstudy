@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<c:set var="contextPath" value="<%=request.getContextPath()%>" />
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -24,7 +24,7 @@
     <button type="button" onclick="location.href='${contextPath}/list.do'">전체조회</button>
   </div>
   <hr>
-  <div>전체 학생 <c:out value="${students.size()}" />명</div>
+  <div>전체 학생 ${students.size()}명</div>
   <table border="1">
     <thead>
       <tr>
@@ -41,13 +41,13 @@
     <tbody>
       <c:forEach var="student" items="${students}">
         <tr>
-          <td><c:out value="${student.stu_no}" /></td>
-          <td><c:out value="${student.name}" /></td>
-          <td><c:out value="${student.kor}" /></td>
-          <td><c:out value="${student.eng}" /></td>
-          <td><c:out value="${student.math}" /></td>
-          <td><c:out value="${student.ave}" /></td>
-          <td><c:out value="${student.mark}" /></td>
+          <td>${student.stu_no}</td>
+          <td>${student.name}</td>
+          <td>${student.kor}</td>
+          <td>${student.eng}</td>
+          <td>${student.math}</td>
+          <td>${student.ave}</td>
+          <td>${student.mark}</td>
           <td>
             <button type="button" onclick="location.href='${contextPath}/detail.do?stuNo=${student.stu_no}'">상세</button>
             <button type="button" onclick="deleteStudent(${student.stu_no})">삭제</button>
@@ -61,7 +61,7 @@
       </c:if>
     </tbody>
   </table>
-  <div>전체평균 <c:out value="${averageScore}" /></div>
+  <div>전체평균 ${averageScore}</div>
 
   <script>
     // 평균 범위 검색 기능

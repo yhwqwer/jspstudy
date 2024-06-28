@@ -14,28 +14,28 @@ public class StudentDAOTest {
   @Test
   public void 학생등록테스트() {
     StudentDTO student = new StudentDTO.Builder()
-        .name("정준하") // 테스트 이름
-        .kor(57)
-        .eng(42)
-        .math(95)
-        .ave((57 + 42 + 95) / 3.0)
-        .mark(calculateMark((57 + 42 + 95) / 3.0))
+        .name("이민형") // 테스트 이름
+        .kor(51)
+        .eng(45)
+        .math(78)
+        .ave((51 + 45 + 78) / 3.0)  // 평균 점수 계산
+        .mark(calculateMark((51 + 45 + 78) / 3.0)) // 평균 점수에 따른 등급 계산
         .build();
      
-    // studentDAO.insertStudent(student) 결과가 1이면 테스트를 성공한다.
+    // studentDAO.insertStudent(student) 메소드가 1을 반환하면 테스트 성공
     assertEquals(1, studentDAO.insertStudent(student));
   }
 
   @Test
   public void 학생수정테스트() {
     StudentDTO student = new StudentDTO.Builder()
-        .stu_no(3)
-        .name("권지용")
+        .stu_no(3) // 수정할 학생의 번호
+        .name("박철민")
         .kor(85)
-        .eng(100)
-        .math(80)
-        .ave((85 + 100 + 80) / 3.0)
-        .mark(calculateMark((85 + 100 + 80) / 3.0))
+        .eng(39)
+        .math(60)
+        .ave((85 + 39 + 60) / 3.0) // 평균 점수 계산
+        .mark(calculateMark((85 + 39 + 60) / 3.0)) // 평균 점수에 따른 등급 계산
         .build();
     
     assertEquals(1, studentDAO.updateStudent(student));
